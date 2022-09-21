@@ -85,9 +85,9 @@ Default Scalar Model: Small
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x100           0x180  (384)
-.text                        0x300               0x11a           0x1a7  (423)
+.text                        0x300               0x11e           0x1ad  (429)
 
-                 Total "program" memory used (bytes):          0x327  (807) <1%
+                 Total "program" memory used (bytes):          0x32d  (813) <1%
 
 
 "data" Memory  [Origin = 0x1000, Length = 0xc000]
@@ -236,7 +236,7 @@ __FOSCSEL
 
 __FGS             0x0557fa          0x2
  *(__FGS.sec*)
- __FGS.sec        0x0557fa          0x2 /CW/_FGS—
+ __FGS.sec        0x0557fa          0x2 /CW/_FGS@SÑ
                   0x0557fa                  __FGS.sec
 
 __FUID0
@@ -269,12 +269,12 @@ __FUID3
  .debug_abbrev    0x00014f         0x99 build/default/production/IO.o
  .debug_abbrev    0x0001e8         0xda build/default/production/timer.o
 
-.debug_line       0x000000        0x47a
+.debug_line       0x000000        0x47c
  *(.debug_line)
- .debug_line      0x000000        0x113 build/default/production/main.o
- .debug_line      0x000113        0x11e build/default/production/ChipConfig.o
- .debug_line      0x000231        0x11a build/default/production/IO.o
- .debug_line      0x00034b        0x12f build/default/production/timer.o
+ .debug_line      0x000000        0x115 build/default/production/main.o
+ .debug_line      0x000115        0x11e build/default/production/ChipConfig.o
+ .debug_line      0x000233        0x11a build/default/production/IO.o
+ .debug_line      0x00034d        0x12f build/default/production/timer.o
 
 .debug_frame      0x000000        0x106
  *(.debug_frame)
@@ -2556,7 +2556,7 @@ LOAD c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libm-elf.a
 LOAD c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-elf.a
 END GROUP
 OUTPUT(dist/default/production/Robot_Benguet_Aime.X.production.elf elf32-pic30)
-LOAD /CW/_FGS—
+LOAD /CW/_FGS@SÑ
 LOAD default_isr
 
 .debug_pubtypes
@@ -2613,7 +2613,7 @@ __c30_signature
  .ivt._T1Interrupt
                   0x00001a          0x2 build/default/production/timer.o
 
-.text             0x000300        0x11a
+.text             0x000300        0x11e
  .text            0x000300         0x9c build/default/production/timer.o
                   0x000300                  _InitTimer23
                   0x000332                  __T3Interrupt
@@ -2623,5 +2623,5 @@ __c30_signature
                   0x00039c                  _InitOscillator
  .text            0x0003f2         0x1a build/default/production/IO.o
                   0x0003f2                  _InitIO
- .text            0x00040c          0xe build/default/production/main.o
+ .text            0x00040c         0x12 build/default/production/main.o
                   0x00040c                  _main
