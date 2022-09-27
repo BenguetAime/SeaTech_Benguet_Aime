@@ -28,9 +28,17 @@ void InitPWM(void) {
 }
 
 void PWMSetSpeed(float vitesseEnPourcents) {
+    if (vitesseEnPourcents>0){
     robotState.vitesseGaucheCommandeCourante = vitesseEnPourcents;
     MOTEUR_GAUCHE_L_PWM_ENABLE = 0; //Pilotage de la pin en mode IO
     MOTEUR_GAUCHE_L_IO_OUTPUT = 1; //Mise à 1 de la pin
     MOTEUR_GAUCHE_H_PWM_ENABLE = 1; //Pilotage de la pin en mode PWM
     MOTEUR_GAUCHE_DUTY_CYCLE = Abs(robotState.vitesseGaucheCommandeCourante * PWMPER);
+    }
+    else {robotState.vitesseGaucheCommandeCourante = vitesseEnPourcents;
+    MOTEUR_GAUCHE_L_PWM_ENABLE = 0; //Pilotage de la pin en mode IO
+    MOTEUR_GAUCHE_H_IO_OUTPUT = 1; //Mise à 1 de la pin
+    MOTEUR_GAUCHE_H_PWM_ENABLE = 0; //Pilotage de la pin en mode PWM
+    MOTEUR_GAUCHE_DUTY_CYCLE = Abs(robotState.vitesseGaucheCommandeCourante * PWMPER);
+    }
 }
