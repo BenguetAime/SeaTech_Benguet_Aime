@@ -31,7 +31,7 @@ InitTimer1();
 //Initialisation fonctions PWM
 
 InitPWM();
-PWMSetSpeed(50);
+PWMSetSpeed(20);
 
 //Initialisation fonctions PWM
 

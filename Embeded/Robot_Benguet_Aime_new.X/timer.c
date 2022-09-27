@@ -25,7 +25,7 @@ T2CONbits .TON = 1 ; // S t a r t 32?b i t Timer
 
 
 // I n t e r r u p t i o n du time r 32 b i t s s u r 2?3
-void __attribute__ ( ( i n t e r r u p t , no_auto_psv ) ) _T3Interrupt ( void) {
+void __attribute__ ((interrupt , no_auto_psv ) ) _T3Interrupt ( void) {
 IFS0bits . T3IF = 0 ; // Cle a r Timer3 I n t e r r u p t Flag
 LED_ORANGE = !LED_ORANGE;
 }
@@ -50,7 +50,7 @@ IEC0bits.T1IE = 1 ; // Enable Timer i n t e r r u p t
 T1CONbits.TON = 1 ; // Enable Timer
 }
 // I n t e r r u p t i o n du time r 1
-void __attribute__ ( ( i n t e r r u p t , no_auto_psv ) ) _T1Interrupt ( void)
+void __attribute__ ( (interrupt , no_auto_psv ) ) _T1Interrupt ( void)
 {
 IFS0bits . T1IF = 0 ;
 LED_BLANCHE = !LED_BLANCHE;

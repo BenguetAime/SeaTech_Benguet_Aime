@@ -1,2 +1,2 @@
 #include "robot.h"
-volatileROBOT_STATE_BITSrobotState;
+volatile ROBOT_STATE_BITS robotState;
