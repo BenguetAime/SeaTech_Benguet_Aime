@@ -47,6 +47,9 @@ void InitIO()
     // PINS PWM
     _TRISB14 = 0;// Pin B14
     _TRISB15 = 0;// Pin B15
+    //
+    _TRISC6 = 0;// Pin C6
+    _TRISC7 = 0;// Pin C7
     
 
     // Moteurs 
