@@ -10,6 +10,8 @@
       <itemPath>Robot.h</itemPath>
       <itemPath>ToolBox.h</itemPath>
       <itemPath>timer.h</itemPath>
+      <itemPath>ADC.h</itemPath>
+      <itemPath>main.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -25,6 +27,7 @@
       <itemPath>ToolBox.c</itemPath>
       <itemPath>main.c</itemPath>
       <itemPath>timer.c</itemPath>
+      <itemPath>ADC.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
