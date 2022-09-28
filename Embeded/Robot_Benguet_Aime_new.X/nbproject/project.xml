@@ -6,9 +6,9 @@
             <name>Robot_Benguet_Aime_new</name>
             <creation-uuid>a42a5f44-2483-468e-b39f-667f24732d40</creation-uuid>
             <make-project-type>0</make-project-type>
-            <c-extensions/>
+            <c-extensions>c</c-extensions>
             <cpp-extensions/>
-            <header-extensions>c,h</header-extensions>
+            <header-extensions>h</header-extensions>
             <asminc-extensions/>
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
