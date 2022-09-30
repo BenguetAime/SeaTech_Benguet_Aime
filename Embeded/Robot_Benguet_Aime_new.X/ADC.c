@@ -5,10 +5,6 @@
 unsigned char ADCResultIndex = 0;
 static unsigned int ADCResult[4];
 unsigned char ADCConversionFinishedFlag;
-//unsigned int * result=ADCGetResult();
-unsigned int ADCValue0;
-unsigned int ADCValue1;
-unsigned int ADCValue2;
 
 
 /****************************************************************************************************/
