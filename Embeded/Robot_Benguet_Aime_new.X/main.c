@@ -5,6 +5,11 @@
 #include "IO.h"
 #include "timer.h"
 #include "PWM.h"
+#include "ADC.h"
+unsigned int ADCValue0;
+unsigned int ADCValue1;
+unsigned int ADCValue2;
+
 
 int main(void) {
 
@@ -44,6 +49,13 @@ int main(void) {
 
     while (1) {
         //LED_BLANCHE = !LED_BLANCHE;
+        //unsigned int ? result=ADCGetResult( );
+        if (ADCIsConversionFinishedFlag ()== 1){
+        ADCClearConversionFinishedFlag();
+        ADCValue0=ADCGetResult[0];
+        ADCValue1=ADCGetResult[1];
+        ADCValue2=ADCGetResult[2];
+        }
     } // f i n main
 
 }
