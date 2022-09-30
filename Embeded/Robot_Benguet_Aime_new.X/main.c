@@ -9,7 +9,7 @@
 unsigned int ADCValue0;
 unsigned int ADCValue1;
 unsigned int ADCValue2;
-//unsigned int * result[4]=ADCGetResult();
+
 
 
 int main(void) {
@@ -53,12 +53,17 @@ int main(void) {
     while (1) {
         //LED_BLANCHE = !LED_BLANCHE;
         //unsigned int ? result=ADCGetResult( );
+        
         if (ADCIsConversionFinished()== 1){
+            
         ADCClearConversionFinishedFlag();
-        ADCValue0=ADCGetResult()[0];
+        unsigned int * result=ADCGetResult();
+        /*ADCValue0=ADCGetResult()[0];
         ADCValue1=ADCGetResult()[1];
-        ADCValue2=ADCGetResult()[2];
-    
+        ADCValue2=ADCGetResult()[2];*/
+        ADCValue0=result[0];
+        ADCValue1=result[1];
+        ADCValue2=result[2];
         }
     } // f i n main
 
