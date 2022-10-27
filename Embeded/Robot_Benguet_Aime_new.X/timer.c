@@ -28,7 +28,7 @@ void InitTimer23(void) {
 
 
 // I n t e r r u p t i o n du time r 32 b i t s s u r 2?3
-/*
+
 void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void) {
     IFS0bits . T3IF = 0; // Cle a r Timer3 I n t e r r u p t Flag
     LED_ORANGE = !LED_ORANGE;
@@ -43,7 +43,7 @@ void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void) {
         toggle = 0;
     }
 }
-*/
+
 void InitTimer1(void) {
     //Timer1 pour h o r o d a t e r l e s mesures ( 1ms)
     T1CONbits .TON = 0; // Di s a bl e Timer
@@ -69,5 +69,5 @@ void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void) {
     LED_BLANCHE = !LED_BLANCHE;
     //PWMUpdateSpeed();
     //InitADC1();
-    ADC1StartConversionSequence();
+    ADC1StartConversionSequence();   
 }

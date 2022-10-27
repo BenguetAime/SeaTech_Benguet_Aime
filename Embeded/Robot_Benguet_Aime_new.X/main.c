@@ -11,7 +11,7 @@ unsigned int ADCValue1;
 unsigned int ADCValue2;
 
 
-
+ 
 int main(void) {
 
     //???????????????????????????????????????????????????????????????????????????????????????
@@ -25,9 +25,10 @@ int main(void) {
     //????????????????????????????????????????????????????????
 
     InitIO();
-    LED_BLANCHE = 1;
-    LED_BLEUE = 1;
-    LED_ORANGE = 1;
+    LED_ORANGE=1;
+    LED_BLEUE=1;
+    LED_BLANCHE=1;
+            
 
     //Initialisaation timers
     InitTimer23();
@@ -38,7 +39,7 @@ int main(void) {
 
     InitPWM();
     //PWMSetSpeed(20, MOTEUR_GAUCHE);
-    //PWMSetSpeed(20, MOTEUR_DROIT);
+    // PWMSetSpeed(20, MOTEUR_DROIT);
 
     
     //Initialisation fonctions ADC
@@ -53,7 +54,8 @@ int main(void) {
     while (1) {
         //LED_BLANCHE = !LED_BLANCHE;
         //unsigned int ? result=ADCGetResult( );
-        
+ 
+
         if (ADCIsConversionFinished()== 1){
             
         ADCClearConversionFinishedFlag();
@@ -64,7 +66,27 @@ int main(void) {
         ADCValue0=result[0];
         ADCValue1=result[1];
         ADCValue2=result[2];
+        
+        if ( ADCValue0 <= 431) {
+            LED_ORANGE=1;
+        }else{
+            LED_ORANGE=0;
         }
+         
+        if ( ADCValue1 <= 431) {
+            LED_BLEUE=1;
+        }else{
+            LED_BLEUE=0;
+        }
+        
+        if ( ADCValue2 <= 431) {
+            LED_BLANCHE=1;
+        }else{
+            LED_BLANCHE=0;
+        }
+        
+        }
+        
     } // f i n main
 
 }
