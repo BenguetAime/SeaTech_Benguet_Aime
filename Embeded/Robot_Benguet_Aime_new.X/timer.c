@@ -3,8 +3,10 @@
 #include "IO.h"
 #include "PWM.h"
 #include "ADC.h"
+#include "main.h"
 
 unsigned char toggle = 0;
+unsigned long timestamp;
 
 
 // I n i t i a l i s a t i o n d ?un time r 32 b i t s
@@ -44,10 +46,10 @@ void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void) {
     }
 }
 
-void InitTimer1(void) {
+void InitTimer1(float freq) {
     //Timer1 pour h o r o d a t e r l e s mesures ( 1ms)
     T1CONbits .TON = 0; // Di s a bl e Timer
-    T1CONbits .TCKPS = 0b01; // P r e s c a l e r
+    //T1CONbits .TCKPS = 0b01; // P r e s c a l e r                         //////////a été commentée au 3.de la partie 1
     // 11 = 1: 2 5 6 p r e s c a l e v al u e
     // 10 = 1: 6 4 p r e s c a l e v al u e
     // 01 = 1: 8 p r e s c a l e v al u e
@@ -55,19 +57,107 @@ void InitTimer1(void) {
 
 
     T1CONbits .TCS = 0; // cl o c k s o u r c e = i n t e r n a l cl o c k
-    PR1 = 40000000/64/50;
+    //PR1 = 40000000/64/50;                                                //////////a été commentée au 3.de la partie 1
+    
+    SetFreqTimer1(freq);
     IFS0bits.T1IF = 0; // Cle a r Timer I n t e r r u p t Flag
     IEC0bits.T1IE = 1; // Enable Timer i n t e r r u p t
     T1CONbits.TON = 1; // Enable Timer
+    
+    
+    
 }
+
+
+//INIT TIMER 4
+
+void InitTimer4(float freq) {
+    //Timer1 pour h o r o d a t e r l e s mesures ( 1ms)
+    T4CONbits .TON = 0; // Di s a bl e Timer
+    //T1CONbits .TCKPS = 0b01; // P r e s c a l e r                         //////////a été commentée au 3.de la partie 1
+    // 11 = 1: 2 5 6 p r e s c a l e v al u e
+    // 10 = 1: 6 4 p r e s c a l e v al u e
+    // 01 = 1: 8 p r e s c a l e v al u e
+    // 00 = 1: 1 p r e s c a l e v al u e
+
+
+    T4CONbits .TCS = 0; // cl o c k s o u r c e = i n t e r n a l cl o c k
+    //PR1 = 40000000/64/50;                                                //////////a été commentée au 3.de la partie 1
+    
+    SetFreqTimer4(freq);
+    IFS1bits.T4IF = 0; // Cle a r Timer I n t e r r u p t Flag
+    IEC1bits.T4IE = 1; // Enable Timer i n t e r r u p t
+    T4CONbits.TON = 1; // Enable Timer
+     
+}
+
+
 
 
 // I n t e r r u p t i o n du time r 1
 
 void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void) {
     IFS0bits . T1IF = 0;
-    LED_BLANCHE = !LED_BLANCHE;
+    //LED_BLANCHE = !LED_BLANCHE;
     //PWMUpdateSpeed();
     //InitADC1();
-    ADC1StartConversionSequence();   
+    ADC1StartConversionSequence(); 
+    //LED_BLEUE=!LED_BLEUE;
+}
+
+
+
+
+// I n t e r r u p t i o n du time r 4
+
+void __attribute__((interrupt, no_auto_psv)) _T4Interrupt(void) {
+    IFS1bits . T4IF = 0;
+    //LED_BLANCHE = !LED_BLANCHE;
+    //PWMUpdateSpeed();
+    //InitADC1();
+    //ADC1StartConversionSequence(); 
+    //LED_BLEUE=!LED_BLEUE;
+    timestamp=timestamp+1;
+    OperatingSystemLoop();
+}
+
+
+
+
+
+// SET FREQ TIMER 1
+
+void SetFreqTimer1(float freq) {
+    T1CONbits.TCKPS = 0b00; //00 = 1:1 prescaler value
+    if (FCY / freq > 65535) {
+        T1CONbits.TCKPS = 0b01; //01 = 1:8 prescaler value
+        if (FCY / freq / 8 > 65535) {
+            T1CONbits.TCKPS = 0b10; //10 = 1:64 prescaler value
+            if (FCY / freq / 64 > 65535) {
+                T1CONbits.TCKPS = 0b11; //11 = 1:256 prescaler value
+                PR1 = (int) (FCY / freq / 256);
+            } else
+                PR1 = (int) (FCY / freq / 64);
+        } else
+            PR1 = (int) (FCY / freq / 8);
+    } else
+        PR1 = (int) (FCY / freq);
+}
+
+
+void SetFreqTimer4(float freq) {
+    T1CONbits.TCKPS = 0b00; //00 = 1:1 prescaler value
+    if (FCY / freq > 65535) {
+        T4CONbits.TCKPS = 0b01; //01 = 1:8 prescaler value
+        if (FCY / freq / 8 > 65535) {
+            T4CONbits.TCKPS = 0b10; //10 = 1:64 prescaler value
+            if (FCY / freq / 64 > 65535) {
+                T4CONbits.TCKPS = 0b11; //11 = 1:256 prescaler value
+                PR1 = (int) (FCY / freq / 256);
+            } else
+                PR4 = (int) (FCY / freq / 64);
+        } else
+            PR4 = (int) (FCY / freq / 8);
+    } else
+        PR4 = (int) (FCY / freq);
 }
