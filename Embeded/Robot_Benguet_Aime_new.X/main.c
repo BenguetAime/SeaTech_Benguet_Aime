@@ -43,7 +43,7 @@ int main(void) {
 
     InitPWM();
     //PWMSetSpeed(20, MOTEUR_GAUCHE);
-    // PWMSetSpeed(20, MOTEUR_DROIT);
+    //PWMSetSpeed(20, MOTEUR_DROIT);
 
     
     //Initialisation fonctions ADC
@@ -112,9 +112,10 @@ int main(void) {
         }
     
     
-    
+  
+}
     unsigned char stateRobot;
-    float vitesse = 50;
+    float vitesse =10;
     
     void OperatingSystemLoop(void) {
     switch (stateRobot) {
@@ -228,4 +229,4 @@ int main(void) {
         
     } // f i n main
     
-}
+//}    COMMENTEE
