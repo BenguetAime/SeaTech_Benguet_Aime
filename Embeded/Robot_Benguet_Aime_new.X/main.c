@@ -35,7 +35,7 @@ int main(void) {
 
     //Initialisaation timers
     InitTimer23();
-    //InitTimer1(2.5);
+    InitTimer1(50);
     InitTimer4(1000);
     //Initialisaation timers
 
@@ -95,7 +95,7 @@ int main(void) {
             LED_ORANGE=0;
         }*/
         
-        /*
+        
         if (robotState.distanceTelemetreGauche<30){LED_BLANCHE=1;}
         else{
             LED_BLANCHE=0;}
@@ -107,7 +107,7 @@ int main(void) {
             LED_ORANGE=1;
         }else{
             LED_ORANGE=0;
-        }*/
+        }
         
         }
     
