@@ -47,6 +47,11 @@ namespace ExtendedSerialPort
                 handler(this, new DataReceivedArgs { Data = data });
             }
         }
+
+        public void WriteLine(byte v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class DataReceivedArgs : EventArgs

@@ -28,6 +28,8 @@
             <TextBox x:Name="textBoxReception" Margin="0" TextWrapping="Wrap"  BorderBrush="#FFDDDDDD" IsReadOnly="True" Background="#FFDDDDDD"/>
         </GroupBox>
         <Button x:Name="ButtonEnvoyer" Content="Envoyer" Grid.Column="1" Margin="122,0,0,0" Grid.Row="3" Width="100" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" RenderTransformOrigin="0.483,0.452" Click="ButtonEnvoyer_Click_1"/>
+        <Button x:Name="Clear" Content="Clear" Grid.Column="3" Margin="0" Grid.Row="3" Width="100" Height="30" Click="button_Click" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+        <Button x:Name="Test" Grid.ColumnSpan="3" Content="Test" Grid.Column="1" Margin="0" Grid.Row="3" Width="75" Click="Test_Click"/>
 
     </Grid>
 </Window>
