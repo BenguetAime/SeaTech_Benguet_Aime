@@ -51,7 +51,7 @@ int main(void) {
     //Initialisation fonctions ADC
     InitADC1();
     
-    //
+    /////////////////////////////////////
     InitUART();
 
 
@@ -120,6 +120,12 @@ int main(void) {
             LED_BLANCHE=0;}
         
             
+        
+        
+        
+        ///////////// PILOTAGE ET SUPERVISION
+        SendMessageDirect((unsigned char*) "Bonjour", 7);
+        __delay32(40000000);
         }
     
     
