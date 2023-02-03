@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=ChipConfig.c IO.c PWM.c Robot..c ToolBox.c main.c timer.c ADC.c UART.c CB_TX1.c
+SOURCEFILES_QUOTED_IF_SPACED=ChipConfig.c IO.c PWM.c Robot..c ToolBox.c main.c timer.c ADC.c UART.c CB_TX1.c CB_RX1.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/ChipConfig.o ${OBJECTDIR}/IO.o ${OBJECTDIR}/PWM.o ${OBJECTDIR}/Robot..o ${OBJECTDIR}/ToolBox.o ${OBJECTDIR}/main.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/ADC.o ${OBJECTDIR}/UART.o ${OBJECTDIR}/CB_TX1.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/ChipConfig.o.d ${OBJECTDIR}/IO.o.d ${OBJECTDIR}/PWM.o.d ${OBJECTDIR}/Robot..o.d ${OBJECTDIR}/ToolBox.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/timer.o.d ${OBJECTDIR}/ADC.o.d ${OBJECTDIR}/UART.o.d ${OBJECTDIR}/CB_TX1.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/ChipConfig.o ${OBJECTDIR}/IO.o ${OBJECTDIR}/PWM.o ${OBJECTDIR}/Robot..o ${OBJECTDIR}/ToolBox.o ${OBJECTDIR}/main.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/ADC.o ${OBJECTDIR}/UART.o ${OBJECTDIR}/CB_TX1.o ${OBJECTDIR}/CB_RX1.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/ChipConfig.o.d ${OBJECTDIR}/IO.o.d ${OBJECTDIR}/PWM.o.d ${OBJECTDIR}/Robot..o.d ${OBJECTDIR}/ToolBox.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/timer.o.d ${OBJECTDIR}/ADC.o.d ${OBJECTDIR}/UART.o.d ${OBJECTDIR}/CB_TX1.o.d ${OBJECTDIR}/CB_RX1.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/ChipConfig.o ${OBJECTDIR}/IO.o ${OBJECTDIR}/PWM.o ${OBJECTDIR}/Robot..o ${OBJECTDIR}/ToolBox.o ${OBJECTDIR}/main.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/ADC.o ${OBJECTDIR}/UART.o ${OBJECTDIR}/CB_TX1.o
+OBJECTFILES=${OBJECTDIR}/ChipConfig.o ${OBJECTDIR}/IO.o ${OBJECTDIR}/PWM.o ${OBJECTDIR}/Robot..o ${OBJECTDIR}/ToolBox.o ${OBJECTDIR}/main.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/ADC.o ${OBJECTDIR}/UART.o ${OBJECTDIR}/CB_TX1.o ${OBJECTDIR}/CB_RX1.o
 
 # Source Files
-SOURCEFILES=ChipConfig.c IO.c PWM.c Robot..c ToolBox.c main.c timer.c ADC.c UART.c CB_TX1.c
+SOURCEFILES=ChipConfig.c IO.c PWM.c Robot..c ToolBox.c main.c timer.c ADC.c UART.c CB_TX1.c CB_RX1.c
 
 
 
@@ -155,6 +155,12 @@ ${OBJECTDIR}/CB_TX1.o: CB_TX1.c  .generated_files/flags/default/ae7bd2423eb8f40a
 	@${RM} ${OBJECTDIR}/CB_TX1.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  CB_TX1.c  -o ${OBJECTDIR}/CB_TX1.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/CB_TX1.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1  -mno-eds-warn  -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
+${OBJECTDIR}/CB_RX1.o: CB_RX1.c  .generated_files/flags/default/23000cb64be37247d58b30477fa42a9c5854ca78 .generated_files/flags/default/63bb65385b9bcfd57ff63c9d0ae2a7c08640c179
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/CB_RX1.o.d 
+	@${RM} ${OBJECTDIR}/CB_RX1.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  CB_RX1.c  -o ${OBJECTDIR}/CB_RX1.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/CB_RX1.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1  -mno-eds-warn  -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
 else
 ${OBJECTDIR}/ChipConfig.o: ChipConfig.c  .generated_files/flags/default/bed9d5c4d8142a1d6e4d6cf980debd9c705be755 .generated_files/flags/default/63bb65385b9bcfd57ff63c9d0ae2a7c08640c179
 	@${MKDIR} "${OBJECTDIR}" 
@@ -215,6 +221,12 @@ ${OBJECTDIR}/CB_TX1.o: CB_TX1.c  .generated_files/flags/default/b60ed6389b01c7ce
 	@${RM} ${OBJECTDIR}/CB_TX1.o.d 
 	@${RM} ${OBJECTDIR}/CB_TX1.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  CB_TX1.c  -o ${OBJECTDIR}/CB_TX1.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/CB_TX1.o.d"      -mno-eds-warn  -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/CB_RX1.o: CB_RX1.c  .generated_files/flags/default/a819dbf5388f1b0773454183aa0d76db9cfc8b8e .generated_files/flags/default/63bb65385b9bcfd57ff63c9d0ae2a7c08640c179
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/CB_RX1.o.d 
+	@${RM} ${OBJECTDIR}/CB_RX1.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  CB_RX1.c  -o ${OBJECTDIR}/CB_RX1.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/CB_RX1.o.d"      -mno-eds-warn  -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 endif
 
