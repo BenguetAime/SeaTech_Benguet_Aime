@@ -87,10 +87,6 @@ namespace RobotInterface_BENGUET
         private void SendMessage()
         {
             //serialPort1.WriteLine(textBoxEmission.Text);
-            //byte[] DataSend = Encoding.ASCII.GetBytes(textBoxEmission.Text);
-            //for (int i=0;Lengt(DataSend);i++)
-
-            //serialPort1.WriteLine(DataSend);
             //textBoxEmission.Text = "";
 
         }
@@ -161,6 +157,69 @@ namespace RobotInterface_BENGUET
             serialPort1.Write(msg, 0, msg.Length);
         }
 
+
+
+        public enum StateReception
+        {
+            Waiting,
+            FunctionMSB,
+            FunctionLSB,
+            PayloadLengthMSB,
+            PayloadLengthLSB,
+            Payload,
+            CheckSum
+        }
+
+        StateReception rcvState = StateReception.Waiting;
+        int msgDecodedFunction = 0;
+        int msgDecodedPayloadLength = 0;
+        byte[] msgDecodedPayload;
+        int msgDecodedPayloadIndex = 0; //pointeur ou on ecrit
+
+        private void DecodeMessage(byte c)
+        {
+            switch (rcvState)
+            {
+                case StateReception.Waiting:
+                    if (c == 0xFE) 
+                    {
+                        msgDecodedPayload[0] = 0xFE;
+                        rcvState = StateReception.FunctionMSB;
+                    }
+                    break;
+                case StateReception.FunctionMSB:
+
+                    rcvState = StateReception.FunctionLSB;
+                    break;
+                case StateReception.FunctionLSB:
+                    msgDecodedPayload[2] = c;
+                    rcvState= StateReception.PayloadLengthMSB;
+                    break;
+                case StateReception.PayloadLengthMSB:
+                    msgDecodedPayload[3] = c;
+                    rcvState = StateReception.PayloadLengthLSB;
+                    break;
+                case StateReception.PayloadLengthLSB:
+                    msgDecodedPayload[4] = c;
+                    rcvState= StateReception.Payload;
+                    break;
+                case StateReception.Payload:
+
+                    rcvState = StateReception.CheckSum;
+                    break;
+                case StateReception.CheckSum:
+                    ...
+                    if (calculatedChecksum == receivedChecksum)
+                        {
+                            //Success, on a un message valide
+                        }
+                        ...
+                        break;
+                default:
+                    rcvState = StateReception.Waiting;
+                    break;
+            }
+        }
 
 
 
