@@ -6,30 +6,71 @@
         xmlns:local="clr-namespace:RobotInterface_BENGUET"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Margin="10,-14,39,31">
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30"/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="30"/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
-        <GroupBox  Header="Emission" Margin="0" Background="#FFDDDDDD" BorderBrush="Black" Grid.Column="1" Grid.Row="1" >
-            <TextBox x:Name="textBoxEmission" Margin="0" TextWrapping="Wrap" Background="#FFDDDDDD" BorderBrush="Black" AcceptsReturn="True"/>
+        <GroupBox  Header="Emission" Background="#FFDDDDDD" BorderBrush="Black" Grid.Column="0" Grid.Row="0" Margin="5">
+            <TextBox x:Name="textBoxEmission"/>
         </GroupBox>
-        <GroupBox Header="Réception" Margin="0" Background="#FFDDDDDD" BorderBrush="Black" Grid.Column="3" Grid.Row="1">
-            <TextBox x:Name="textBoxReception" Margin="0" TextWrapping="Wrap"  BorderBrush="#FFDDDDDD" IsReadOnly="True" Background="#FFDDDDDD"/>
+        <GroupBox Header="Réception" Background="#FFDDDDDD" BorderBrush="Black" Grid.Column="1" Grid.Row="0" Margin="5">
+            <TextBox x:Name="textBoxReception"/>
         </GroupBox>
-        <Button x:Name="ButtonEnvoyer" Content="Envoyer" Grid.Column="1" Margin="122,0,0,0" Grid.Row="3" Width="100" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" RenderTransformOrigin="0.483,0.452" Click="ButtonEnvoyer_Click_1"/>
-        <Button x:Name="Clear" Content="Clear" Grid.Column="3" Margin="0" Grid.Row="3" Width="100" Height="30" Click="button_Click" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-        <Button x:Name="Test" Grid.ColumnSpan="3" Content="Test" Grid.Column="1" Margin="0" Grid.Row="3" Width="75" Click="Test_Click"/>
+
+        <Button x:Name="ButtonEnvoyer" Content="Envoyer" Grid.Column="0" Grid.Row="1" Width="100" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ButtonEnvoyer_Click_1"/>
+        <Button x:Name="Clear" Content="Clear" Grid.Column="1" Grid.Row="1" Width="100" Height="30" Click="button_Click" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Button x:Name="Test" Grid.ColumnSpan="2" Content="Test" Grid.Column="0" Grid.Row="1" Width="75" Height="30" Click="Test_Click"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+            <GroupBox Header="Leds" Width="200" Height="300" >
+                <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Left">
+                    <GroupBox Header="Led1" Width="100" Height="40" >
+                        <CheckBox x:Name="Led1" Checked="Led1_Checked"  HorizontalAlignment="Left" Width="24"/>
+                    </GroupBox>
+                    <GroupBox Header="Led2" Width="100" Height="50" >
+                        <CheckBox x:Name="Led2"  HorizontalAlignment="Left" Checked="Led2_Checked" Margin="0,2,0,0" Height="24" VerticalAlignment="Top" />
+                    </GroupBox>
+                    <GroupBox Header="Led3" Width="100" Height="40" >
+                        <CheckBox x:Name="Led3"  HorizontalAlignment="Left"   Checked="Led3_Checked" />
+                    </GroupBox>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Télémètres IR" Width="200" Height="300">
+                <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1" HorizontalAlignment="Left">
+                    <GroupBox Header="IR_Gauche (cm) :" Width="180" Height="45" >
+                        <TextBox x:Name="IR_Gauche"  HorizontalAlignment="Center" Height="22" VerticalAlignment="Top"  Width="149" TextChanged="IR_Gauche_TextChanged" Margin="10,0,9,0"  />
+                    </GroupBox>
+                    <GroupBox Header="IR_Centre (cm):" Width="180" Height="45" >
+                        <Label x:Name="IR_Centre"  HorizontalAlignment="Center"  Width="66" Content="" Margin="51,0,51,-3" Height="25" VerticalAlignment="Top" />
+                    </GroupBox>
+                    <GroupBox Header="IR_Droit (cm):" Width="180" Height="50" >
+                        <Label x:Name="IR_Droit"  HorizontalAlignment="Center" Height="25"   VerticalAlignment="Top"  Width="76" Content=""  />
+                    </GroupBox>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Moteurs" Width="200" Height="300" >
+                <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1" HorizontalAlignment="Left">
+                    <GroupBox Header="Vitesse Gauche(cm) :" Width="180" Height="45" >
+                        <Label x:Name="VitesseGauche"  HorizontalAlignment="Center" Height="25" VerticalAlignment="Top"  Width="66" Content=""   />
+                    </GroupBox>
+                    <GroupBox Header=" Vitesse Centre (cm)" Width="180" Height="45" >
+                        <Label x:Name=   "VitesseCentre"  HorizontalAlignment="Center" Height="25" VerticalAlignment="Top"  Width="66" Content="" />
+                    </GroupBox>
+                    <GroupBox Header= " Vitesse Droit (%) " Width="180" Height="50" >
+                        <Label x:Name= "VitesseDroit"  HorizontalAlignment="Center" Height="25"   VerticalAlignment="Top"  Width="76" Content=""  />
+                    </GroupBox>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+
 
     </Grid>
 </Window>

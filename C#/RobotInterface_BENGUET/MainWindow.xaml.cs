@@ -47,16 +47,11 @@ namespace RobotInterface_BENGUET
 
         private void TimerAffichage_Tick(object sender, EventArgs e)
         {
-            if (robot.receivedText != "")
+            while (robot.byteListReceived.Count > 0)
             {
-                textBoxReception.Text += robot.receivedText;
-                robot.receivedText = "";
-
-                while (robot.byteListReceived.Count > 0)
-                {
-                        byte val=robot.byteListReceived.Dequeue();
-                        textBoxReception.Text += val.ToString();
-                }
+                byte c = robot.byteListReceived.Dequeue();
+                DecodeMessage(c);
+                //textBoxReception.Text += val.ToString();
             }
         }
 
@@ -64,9 +59,11 @@ namespace RobotInterface_BENGUET
         {
            
 
-            robot.receivedText += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
-            for(int i=1;i<e.Data.Length;i++)
-                 robot.byteListReceived.Enqueue(e.Data[i]) ;
+            //robot.receivedText += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
+            for (int i = 0; i < e.Data.Length; i++)
+            {
+                robot.byteListReceived.Enqueue(e.Data[i]);
+            }
         }
 
 
@@ -86,8 +83,8 @@ namespace RobotInterface_BENGUET
 
         private void SendMessage()
         {
-            //serialPort1.WriteLine(textBoxEmission.Text);
-            //textBoxEmission.Text = "";
+            serialPort1.WriteLine(textBoxEmission.Text);
+            textBoxEmission.Text = "";
 
         }
 
@@ -100,6 +97,8 @@ namespace RobotInterface_BENGUET
             }
         }
 
+
+
         private void button_Click(object sender, RoutedEventArgs e)
         {
             textBoxReception.Text = "";
@@ -108,6 +107,10 @@ namespace RobotInterface_BENGUET
         byte[] byteList= new byte [20];
         private object unsigned;
 
+
+
+
+
         private void Test_Click(object sender, RoutedEventArgs e)
         {
             // int i;
@@ -115,9 +118,20 @@ namespace RobotInterface_BENGUET
             //{
             //    byteList[i] = (byte)(2*i);
             //}
-            //serialPort1.Write(byteList, 0, byteList.Length);
+            //serialPort1.Write(byteList, 0, byteList.Length);Bonjour
+            /*
             byte[] array = Encoding.ASCII.GetBytes("Bonjour");
-            UartEncodeAndSendMessage(0x0080, array.Length, array);
+            UartEncodeAndSendMessage(0x0080, array.Length, array);*/
+
+            byte[] LED = new byte[] { 1, 0 };
+            UartEncodeAndSendMessage(0x0020, LED.Length, LED);
+            /*
+            byte[] DistIR = new byte[] { 5, 10, 15 };
+            UartEncodeAndSendMessage(0x0030, DistIR.Length, DistIR);
+
+            byte[] Vitesses = new byte[] { 25, 30 };
+            UartEncodeAndSendMessage(0x0040, Vitesses.Length, Vitesses);*/
+
         }
 
 
@@ -178,43 +192,59 @@ namespace RobotInterface_BENGUET
 
         private void DecodeMessage(byte c)
         {
+
             switch (rcvState)
             {
                 case StateReception.Waiting:
-                    if (c == 0xFE) 
+                    if (c == 0xFE)
                     {
-                        msgDecodedPayload[0] = 0xFE;
                         rcvState = StateReception.FunctionMSB;
                     }
                     break;
                 case StateReception.FunctionMSB:
-
+                    msgDecodedFunction = c << 8;
                     rcvState = StateReception.FunctionLSB;
                     break;
+
                 case StateReception.FunctionLSB:
-                    msgDecodedPayload[2] = c;
-                    rcvState= StateReception.PayloadLengthMSB;
+                    msgDecodedFunction += c << 0;
+                    rcvState = StateReception.PayloadLengthMSB;
                     break;
                 case StateReception.PayloadLengthMSB:
-                    msgDecodedPayload[3] = c;
+                    msgDecodedPayloadLength = c << 8;
                     rcvState = StateReception.PayloadLengthLSB;
                     break;
                 case StateReception.PayloadLengthLSB:
-                    msgDecodedPayload[4] = c;
-                    rcvState= StateReception.Payload;
+                    msgDecodedPayloadLength += c << 0;
+                    if (msgDecodedPayloadLength == 0)
+                        rcvState = StateReception.CheckSum;
+                    else
+                    {
+                        rcvState = StateReception.Payload;
+                        msgDecodedPayloadIndex = 0;
+                        msgDecodedPayload = new byte[msgDecodedPayloadLength];
+                    }
                     break;
                 case StateReception.Payload:
-
-                    rcvState = StateReception.CheckSum;
+                    msgDecodedPayload[msgDecodedPayloadIndex] = c;
+                    msgDecodedPayloadIndex++;
+                    if (msgDecodedPayloadIndex >= msgDecodedPayloadLength)
+                        rcvState = StateReception.CheckSum;
                     break;
+
                 case StateReception.CheckSum:
-                    ...
-                    if (calculatedChecksum == receivedChecksum)
-                        {
-                            //Success, on a un message valide
-                        }
-                        ...
-                        break;
+                    int calculatedChecksumvaleur = CalculateChecksum(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
+                    int receivedChecksum = c;
+                    if (calculatedChecksumvaleur == receivedChecksum)
+                    {
+                       textBoxReception.Text += "Message bien reçu";
+                       ProcessDecodedMessage(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
+                      
+                    }
+                    else
+                        textBoxReception.Text += "Message corrompu";
+                    rcvState = StateReception.Waiting;
+                    break;
                 default:
                     rcvState = StateReception.Waiting;
                     break;
@@ -222,8 +252,39 @@ namespace RobotInterface_BENGUET
         }
 
 
+        void ProcessDecodedMessage(int msgFunction, int msgPayloadLength, byte[] msgPayload)
+        {
+            switch (msgFunction)
+            {
+                case 0x0080:
+                    break;
+                case 0x0020:
+                    if (msgPayload[0] == (byte)(1))
+                        IR_Gauche.Text += "LED1";
+                    break;
+                case 0x0030:
+                    break;
+                case 0x0040:
+                    break;
+            }
+        }
 
+        private void Led1_Checked(object sender, RoutedEventArgs e)
+        {
 
+        }
 
+        private void Led2_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Led3_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        
     }
 }
+
