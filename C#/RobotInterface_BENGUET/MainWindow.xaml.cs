@@ -34,7 +34,7 @@ namespace RobotInterface_BENGUET
         public MainWindow()
         {
             InitializeComponent();
-            serialPort1 = new ReliableSerialPort("COM15", 115200, Parity.None, 8, StopBits.One);
+            serialPort1 = new ReliableSerialPort("COM1", 115200, Parity.None, 8, StopBits.One);
             serialPort1.DataReceived += SerialPort1_DataReceived;
             serialPort1.Open();
 
@@ -85,7 +85,8 @@ namespace RobotInterface_BENGUET
         {
             serialPort1.WriteLine(textBoxEmission.Text);
             textBoxEmission.Text = "";
-
+            
+           
         }
 
 
@@ -118,12 +119,12 @@ namespace RobotInterface_BENGUET
             //{
             //    byteList[i] = (byte)(2*i);
             //}
-            //serialPort1.Write(byteList, 0, byteList.Length);Bonjour
-            /*
+            //serialPort1.Write(byteList, 0, byteList.Length);
+            
             byte[] array = Encoding.ASCII.GetBytes("Bonjour");
-            UartEncodeAndSendMessage(0x0080, array.Length, array);*/
+            UartEncodeAndSendMessage(0x0080, array.Length, array);
 
-            byte[] LED = new byte[] { 1, 0 };
+            /* byte[] LED = new byte[] { 1, 0 };
             UartEncodeAndSendMessage(0x0020, LED.Length, LED);
             /*
             byte[] DistIR = new byte[] { 5, 10, 15 };
@@ -168,7 +169,8 @@ namespace RobotInterface_BENGUET
             }
             msg[5+msgPayloadLength] = CalculateChecksum(msgFunction, msgPayloadLength, msgPayload);
 
-            serialPort1.Write(msg, 0, msg.Length);
+            //serialPort1.Write(msg, 0, msg.Length);
+            IR_Droit.Content += "ok";//Encoding.UTF8.GetString(msg,0,msg.Length);
         }
 
 
@@ -243,7 +245,7 @@ namespace RobotInterface_BENGUET
                     }
                     else
                         textBoxReception.Text += "Message corrompu";
-                    rcvState = StateReception.Waiting;
+                        rcvState = StateReception.Waiting;
                     break;
                 default:
                     rcvState = StateReception.Waiting;
