@@ -280,7 +280,10 @@ namespace RobotInterface_BENGUET
                 case 0x0040:
                     VitesseGauche.Content = msgPayload[0];
                     VitesseDroit.Content = msgPayload[1];
-
+                    break;
+                case 0x0050:
+                    textBoxReception.Text += "\n \nEtat du robot rexçu :\n" + Encoding.UTF8.GetString(msgPayload, 0, msgPayloadLength) +
+                        "\nFin message \n \n";
                     break;
             }
         }

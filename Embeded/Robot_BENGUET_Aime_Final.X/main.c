@@ -95,7 +95,8 @@ int main(void) {
             robotState.distanceTelemetreExtremiteDroit = 34 / volts - 5;
 
             
-            unsigned char payload[3] ={robotState.distanceTelemetreGauche,robotState.distanceTelemetreCentre,robotState.distanceTelemetreDroit}; 
+            unsigned char payload[3] ={robotState.distanceTelemetreGauche,
+            robotState.distanceTelemetreCentre,robotState.distanceTelemetreDroit}; 
             UartEncodeAndSendMessage(0x0030,3,payload);
             
             
@@ -121,7 +122,7 @@ int main(void) {
         }
 
         int i;
-        unsigned char payload[7] = {'B', 'o', 'n', 'j', 'o', 'u', 'r'};
+        //unsigned char payload[7] = {'B', 'o', 'n', 'j', 'o', 'u', 'r'};
         /*for (i = 0; i < CB_RX1_GetDataSize(); i++) {
             unsigned char c = CB_RX1_Get();
             SendMessage(&c, 1);
@@ -152,6 +153,7 @@ void OperatingSystemLoop(void) {
             PWMSetSpeedConsigne(vitesse, MOTEUR_DROIT);
             PWMSetSpeedConsigne(vitesse, MOTEUR_GAUCHE);
             stateRobot = STATE_AVANCE_EN_COURS;
+            UartSendStateRobot(0x0050, 2, timestamp );
             break;
         case STATE_AVANCE_EN_COURS:
             SetNextRobotStateInAutomaticMode();
@@ -161,6 +163,7 @@ void OperatingSystemLoop(void) {
             PWMSetSpeedConsigne(vitesse, MOTEUR_DROIT);
             PWMSetSpeedConsigne(0, MOTEUR_GAUCHE);
             stateRobot = STATE_TOURNE_GAUCHE_EN_COURS;
+            UartSendStateRobot(0x0050, 4, timestamp );
             break;
         case STATE_TOURNE_GAUCHE_EN_COURS:
             SetNextRobotStateInAutomaticMode();
@@ -170,6 +173,7 @@ void OperatingSystemLoop(void) {
             PWMSetSpeedConsigne(0, MOTEUR_DROIT);
             PWMSetSpeedConsigne(vitesse, MOTEUR_GAUCHE);
             stateRobot = STATE_TOURNE_DROITE_EN_COURS;
+            UartSendStateRobot(0x0050, 6, timestamp );
             break;
         case STATE_TOURNE_DROITE_EN_COURS:
             SetNextRobotStateInAutomaticMode();
@@ -179,6 +183,7 @@ void OperatingSystemLoop(void) {
             PWMSetSpeedConsigne(vitesse / 2, MOTEUR_DROIT);
             PWMSetSpeedConsigne(-vitesse / 2, MOTEUR_GAUCHE);
             stateRobot = STATE_TOURNE_SUR_PLACE_GAUCHE_EN_COURS;
+            UartSendStateRobot(0x0050, 8, timestamp );
             break;
         case STATE_TOURNE_SUR_PLACE_GAUCHE_EN_COURS:
             SetNextRobotStateInAutomaticMode();
@@ -188,6 +193,7 @@ void OperatingSystemLoop(void) {
             PWMSetSpeedConsigne(-vitesse / 2, MOTEUR_DROIT);
             PWMSetSpeedConsigne(vitesse / 2, MOTEUR_GAUCHE);
             stateRobot = STATE_TOURNE_SUR_PLACE_DROITE_EN_COURS;
+            UartSendStateRobot(0x0050, 10, timestamp );
             break;
         case STATE_TOURNE_SUR_PLACE_DROITE_EN_COURS:
             SetNextRobotStateInAutomaticMode();
