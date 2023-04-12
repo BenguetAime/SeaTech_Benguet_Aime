@@ -34,7 +34,7 @@ namespace RobotInterface_BENGUET
         public MainWindow()
         {
             InitializeComponent();
-            serialPort1 = new ReliableSerialPort("COM1", 115200, Parity.None, 8, StopBits.One);
+            serialPort1 = new ReliableSerialPort("COM15", 115200, Parity.None, 8, StopBits.One);
             serialPort1.DataReceived += SerialPort1_DataReceived;
             serialPort1.Open();
 
@@ -85,8 +85,8 @@ namespace RobotInterface_BENGUET
         {
             serialPort1.WriteLine(textBoxEmission.Text);
             textBoxEmission.Text = "";
-            
            
+
         }
 
 
@@ -124,14 +124,14 @@ namespace RobotInterface_BENGUET
             byte[] array = Encoding.ASCII.GetBytes("Bonjour");
             UartEncodeAndSendMessage(0x0080, array.Length, array);
 
-            /* byte[] LED = new byte[] { 1, 0 };
+            byte[] LED = new byte[] { 1, 0 };
             UartEncodeAndSendMessage(0x0020, LED.Length, LED);
-            /*
+            
             byte[] DistIR = new byte[] { 5, 10, 15 };
             UartEncodeAndSendMessage(0x0030, DistIR.Length, DistIR);
 
             byte[] Vitesses = new byte[] { 25, 30 };
-            UartEncodeAndSendMessage(0x0040, Vitesses.Length, Vitesses);*/
+            UartEncodeAndSendMessage(0x0040, Vitesses.Length, Vitesses);
 
         }
 
@@ -259,32 +259,31 @@ namespace RobotInterface_BENGUET
             switch (msgFunction)
             {
                 case 0x0080:
+                    textBoxReception.Text += "\n \nMessage text rexçu :\n" + Encoding.UTF8.GetString(msgPayload, 0, msgPayloadLength)+
+                        "\nFin message text \n \n";
                     break;
                 case 0x0020:
-                    if (msgPayload[0] == (byte)(1))
-                        IR_Gauche.Text += "LED1";
+                    if (msgPayload[0] == 1)
+                        checkboxLed1.IsChecked = true;
+                    
+                    else if (msgPayload[0] == 2)
+                        checkboxLed1.IsChecked = true;
+                    else if (msgPayload[0] == 3)
+                        checkboxLed1.IsChecked = true;
                     break;
                 case 0x0030:
+                    IR_Gauche.Content = msgPayload[0];
+                    IR_Centre.Content = msgPayload[1];
+                    IR_Droit.Content = msgPayload[2];
                     break;
                 case 0x0040:
+                    VitesseGauche.Content = msgPayload[0];
+                    VitesseDroit.Content = msgPayload[1];
+
                     break;
             }
         }
 
-        private void Led1_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Led2_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Led3_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         
     }

@@ -31,13 +31,13 @@
             <GroupBox Header="Leds" Width="200" Height="300" >
                 <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Left">
                     <GroupBox Header="Led1" Width="100" Height="40" >
-                        <CheckBox x:Name="Led1" Checked="Led1_Checked"  HorizontalAlignment="Left" Width="24"/>
+                        <CheckBox x:Name="checkboxLed1"   HorizontalAlignment="Left" Width="24"/>
                     </GroupBox>
-                    <GroupBox Header="Led2" Width="100" Height="50" >
-                        <CheckBox x:Name="Led2"  HorizontalAlignment="Left" Checked="Led2_Checked" Margin="0,2,0,0" Height="24" VerticalAlignment="Top" />
+                    <GroupBox Header="checkboxLed2" Width="100" Height="50" >
+                        <CheckBox x:Name="Led2"  HorizontalAlignment="Left"   Height="24" VerticalAlignment="Top" />
                     </GroupBox>
-                    <GroupBox Header="Led3" Width="100" Height="40" >
-                        <CheckBox x:Name="Led3"  HorizontalAlignment="Left"   Checked="Led3_Checked" />
+                    <GroupBox Header="checkboxLed3" Width="100" Height="40" >
+                        <CheckBox x:Name="Led3"  HorizontalAlignment="Left"    />
                     </GroupBox>
                 </StackPanel>
             </GroupBox>
@@ -45,27 +45,25 @@
             <GroupBox Header="Télémètres IR" Width="200" Height="300">
                 <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1" HorizontalAlignment="Left">
                     <GroupBox Header="IR_Gauche (cm) :" Width="180" Height="45" >
-                        <TextBox x:Name="IR_Gauche"  HorizontalAlignment="Center" Height="22" VerticalAlignment="Top"  Width="149"   />
+                        <Label x:Name="IR_Gauche"  HorizontalAlignment="Center" Height="22" VerticalAlignment="Top"  Width="149"   />
                     </GroupBox>
                     <GroupBox Header="IR_Centre (cm):" Width="180" Height="45" >
-                        <TextBox x:Name="IR_Centre"  HorizontalAlignment="Center" Height="22" VerticalAlignment="Top"  Width="149"   />
+                        <Label x:Name="IR_Centre"  HorizontalAlignment="Center" Height="22" VerticalAlignment="Top"  Width="149"   />
                     </GroupBox>
-                    <GroupBox Header="IR_Droit (cm):" Width="180" Height="50" >
-                        <TextBox x:Name="IR_Droit"  HorizontalAlignment="Center" Height="18" VerticalAlignment="Top"  Width="149"   />
+                    <GroupBox Header="IR_Droit (cm):" Width="180" Height="49" >
+                        <Label x:Name="IR_Droit"  HorizontalAlignment="Center" Height="30" VerticalAlignment="Top"  Width="148" Margin="10,0,10,-4"   />
                     </GroupBox>
                 </StackPanel>
             </GroupBox>
 
             <GroupBox Header="Moteurs" Width="200" Height="300" >
                 <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1" HorizontalAlignment="Left">
-                    <GroupBox Header="Vitesse Gauche(cm) :" Width="180" Height="45" >
-                        <TextBox x:Name= "VitesseGauche"  HorizontalAlignment="Center" Height="22" VerticalAlignment="Top"  Width="149"   />
+                    <GroupBox Header="Vitesse Gauche(cm) :" Width="180" Height="50" >
+                        <Label x:Name= "VitesseGauche"  HorizontalAlignment="Center" Height="30" VerticalAlignment="Top"  Width="149"   />
                     </GroupBox>
-                    <GroupBox Header=" Vitesse Centre (cm)" Width="180" Height="45" >
-                        <TextBox x:Name= "VitesseCentre"  HorizontalAlignment="Center" Height="22" VerticalAlignment="Top"  Width="149"   />
-                    </GroupBox>
+
                     <GroupBox Header= " Vitesse Droit (%) " Width="180" Height="50" >
-                        <TextBox x:Name= "VitesseDroit"  HorizontalAlignment="Center" Height="18" VerticalAlignment="Top"  Width="149"   />
+                        <Label x:Name= "VitesseDroit"  HorizontalAlignment="Center" Height="30" VerticalAlignment="Top"  Width="149"   />
                     </GroupBox>
                 </StackPanel>
             </GroupBox>
