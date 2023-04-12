@@ -80,6 +80,8 @@ int main(void) {
             unsigned int * result = ADCGetResult();
             float volts = ((float) result[1])*3.3 / 4096 * 3.2;
             robotState.distanceTelemetreDroit = 34 / volts - 5;
+            
+            
             volts = ((float) result[2])*3.3 / 4096 * 3.2;
             robotState.distanceTelemetreCentre = 34 / volts - 5;
             volts = ((float) result[4])*3.3 / 4096 * 3.2;

@@ -63,7 +63,7 @@ namespace RobotInterface_BENGUET
             for (int i = 0; i < e.Data.Length; i++)
             {
                 robot.byteListReceived.Enqueue(e.Data[i]);
-                textBoxReception.Text += e.Data;
+               
             }
         }
 
