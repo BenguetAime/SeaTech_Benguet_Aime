@@ -47,7 +47,7 @@ void UartEncodeAndSendMessage(int msgFunction,int msgPayloadLength, unsigned cha
 
 
 void UartSendStateRobot(int msgFunction, int NumSate, unsigned long timestamp ){
-        int msgLength= 5+6+1;//timestamp
+        int msgLength= 5+6;//timestamp
         unsigned char msg[msgLength];
         
         //sof
@@ -56,8 +56,8 @@ void UartSendStateRobot(int msgFunction, int NumSate, unsigned long timestamp ){
         msg[1] = (unsigned char)(msgFunction>>8);
         msg[2] =(unsigned char)(msgFunction>>0);
         //payload length
-        msg[3] =(unsigned char)(2>>8);
-        msg[4] =(unsigned char)(2>>0);
+        msg[3] =(unsigned char)(5>>8);
+        msg[4] =(unsigned char)(5>>0);
         //payload
         msg[5]=(unsigned char)(NumSate);
         msg[6]=(unsigned char)(timestamp>>24);
@@ -66,7 +66,8 @@ void UartSendStateRobot(int msgFunction, int NumSate, unsigned long timestamp ){
         msg[9]=(unsigned char)(timestamp>>0);
         //checksum
         unsigned char* msgPayload[5]={msg[5],msg[6],msg[7],msg[8],msg[9]};
-        msg[10]=UartCalculateChecksum(msgFunction, 5, msgPayload);
+        msg[10]=UartCalculateChecksum(msgFunction, 5, msgPayload);//OK
+        SendMessage(msg, msgLength);
 }
 /*
 int msgDecodedFunction = 0;

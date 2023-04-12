@@ -47,7 +47,7 @@ int main(void) {
     //Initialisation fonctions PWM
 
     InitPWM();
-    //PWMSetSpeed(20, MOTEUR_GAUCHE);
+    PWMSetSpeed(20, MOTEUR_GAUCHE);
     //PWMSetSpeed(20, MOTEUR_DROIT);
 
 
@@ -97,7 +97,7 @@ int main(void) {
             
             unsigned char payload[3] ={robotState.distanceTelemetreGauche,
             robotState.distanceTelemetreCentre,robotState.distanceTelemetreDroit}; 
-            UartEncodeAndSendMessage(0x0030,3,payload);
+            //UartEncodeAndSendMessage(0x0030,3,payload);
             
             
             
@@ -143,10 +143,13 @@ void OperatingSystemLoop(void) {
             PWMSetSpeedConsigne(0, MOTEUR_DROIT);
             PWMSetSpeedConsigne(0, MOTEUR_GAUCHE);
             stateRobot = STATE_ATTENTE_EN_COURS;
+            UartSendStateRobot(0x0050, 0, timestamp );
 
         case STATE_ATTENTE_EN_COURS:
             if (timestamp > 1000)
                 stateRobot = STATE_AVANCE;
+                
+
             break;
 
         case STATE_AVANCE:

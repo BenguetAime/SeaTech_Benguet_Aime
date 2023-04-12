@@ -272,6 +272,7 @@ namespace RobotInterface_BENGUET
                     else if (msgPayload[0] == 3)
                         checkboxLed1.IsChecked = true;
                     break;
+
                 case 0x0030:
                     IR_Gauche.Content = msgPayload[0];
                     IR_Centre.Content = msgPayload[1];
@@ -282,7 +283,7 @@ namespace RobotInterface_BENGUET
                     VitesseDroit.Content = msgPayload[1];
                     break;
                 case 0x0050:
-                    textBoxReception.Text += "\n \nEtat du robot rexçu :\n" + Encoding.UTF8.GetString(msgPayload, 0, msgPayloadLength) +
+                    textBoxReception.Text += "\n \nEtat du robot reçu :\n" + Encoding.UTF8.GetString(msgPayload, 0, msgPayloadLength) +
                         "\nFin message \n \n";
                     break;
             }
