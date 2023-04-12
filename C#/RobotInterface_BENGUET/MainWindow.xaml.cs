@@ -169,8 +169,8 @@ namespace RobotInterface_BENGUET
             }
             msg[5+msgPayloadLength] = CalculateChecksum(msgFunction, msgPayloadLength, msgPayload);
 
-            //serialPort1.Write(msg, 0, msg.Length);
-            IR_Droit.Content += "ok";//Encoding.UTF8.GetString(msg,0,msg.Length);
+            serialPort1.Write(msg, 0, msg.Length);
+            //IR_Droit.Content += "ok";//Encoding.UTF8.GetString(msg,0,msg.Length);
         }
 
 

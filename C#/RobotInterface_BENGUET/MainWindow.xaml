@@ -45,13 +45,13 @@
             <GroupBox Header="Télémètres IR" Width="200" Height="300">
                 <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1" HorizontalAlignment="Left">
                     <GroupBox Header="IR_Gauche (cm) :" Width="180" Height="45" >
-                        <TextBox x:Name="IR_Gauche"  HorizontalAlignment="Center" Height="22" VerticalAlignment="Top"  Width="149" TextChanged="IR_Gauche_TextChanged" Margin="10,0,9,0"  />
+                        <TextBox x:Name="IR_Gauche"  HorizontalAlignment="Center" Height="22" VerticalAlignment="Top"  Width="149"   />
                     </GroupBox>
                     <GroupBox Header="IR_Centre (cm):" Width="180" Height="45" >
-                        <Label x:Name="IR_Centre"  HorizontalAlignment="Center"  Width="66" Content="" Margin="51,0,51,-3" Height="25" VerticalAlignment="Top" />
+                        <TextBox x:Name="IR_Centre"  HorizontalAlignment="Center" Height="22" VerticalAlignment="Top"  Width="149"   />
                     </GroupBox>
                     <GroupBox Header="IR_Droit (cm):" Width="180" Height="50" >
-                        <Label x:Name="IR_Droit"  HorizontalAlignment="Center" Height="25"   VerticalAlignment="Top"  Width="76" Content=""  />
+                        <TextBox x:Name="IR_Droit"  HorizontalAlignment="Center" Height="18" VerticalAlignment="Top"  Width="149"   />
                     </GroupBox>
                 </StackPanel>
             </GroupBox>
@@ -59,13 +59,13 @@
             <GroupBox Header="Moteurs" Width="200" Height="300" >
                 <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1" HorizontalAlignment="Left">
                     <GroupBox Header="Vitesse Gauche(cm) :" Width="180" Height="45" >
-                        <Label x:Name="VitesseGauche"  HorizontalAlignment="Center" Height="25" VerticalAlignment="Top"  Width="66" Content=""   />
+                        <TextBox x:Name= "VitesseGauche"  HorizontalAlignment="Center" Height="22" VerticalAlignment="Top"  Width="149"   />
                     </GroupBox>
                     <GroupBox Header=" Vitesse Centre (cm)" Width="180" Height="45" >
-                        <Label x:Name=   "VitesseCentre"  HorizontalAlignment="Center" Height="25" VerticalAlignment="Top"  Width="66" Content="" />
+                        <TextBox x:Name= "VitesseCentre"  HorizontalAlignment="Center" Height="22" VerticalAlignment="Top"  Width="149"   />
                     </GroupBox>
                     <GroupBox Header= " Vitesse Droit (%) " Width="180" Height="50" >
-                        <Label x:Name= "VitesseDroit"  HorizontalAlignment="Center" Height="25"   VerticalAlignment="Top"  Width="76" Content=""  />
+                        <TextBox x:Name= "VitesseDroit"  HorizontalAlignment="Center" Height="18" VerticalAlignment="Top"  Width="149"   />
                     </GroupBox>
                 </StackPanel>
             </GroupBox>
