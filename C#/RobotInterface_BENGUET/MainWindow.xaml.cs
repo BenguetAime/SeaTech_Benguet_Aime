@@ -63,6 +63,7 @@ namespace RobotInterface_BENGUET
             for (int i = 0; i < e.Data.Length; i++)
             {
                 robot.byteListReceived.Enqueue(e.Data[i]);
+                textBoxReception.Text += e.Data;
             }
         }
 
@@ -170,7 +171,7 @@ namespace RobotInterface_BENGUET
             msg[5+msgPayloadLength] = CalculateChecksum(msgFunction, msgPayloadLength, msgPayload);
 
             serialPort1.Write(msg, 0, msg.Length);
-            //IR_Droit.Content += "ok";//Encoding.UTF8.GetString(msg,0,msg.Length);
+            
         }
 
 
