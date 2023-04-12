@@ -47,7 +47,7 @@ int main(void) {
     //Initialisation fonctions PWM
 
     InitPWM();
-    PWMSetSpeed(20, MOTEUR_GAUCHE);
+    //PWMSetSpeed(20, MOTEUR_GAUCHE);
     //PWMSetSpeed(20, MOTEUR_DROIT);
 
 
