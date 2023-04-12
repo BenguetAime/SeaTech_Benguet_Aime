@@ -2,6 +2,7 @@
 #include "UART_Protocol.h"
 #include "UART.h"
 #include "CB_TX1.h"
+#include "main.h"
 
 
 unsigned char UartCalculateChecksum(int msgFunction,int msgPayloadLength, unsigned char* msgPayload)
@@ -43,6 +44,30 @@ void UartEncodeAndSendMessage(int msgFunction,int msgPayloadLength, unsigned cha
            
 }
 
+
+
+UartSendStateRobot(int msgFunction, int NumSate, unsigned long timestamp ){
+        int msgLength= 5+6+1;//timestamp
+        unsigned char msg[msgLength];
+        
+        //sof
+        msg[0] = 0xFE;
+        //command
+        msg[1] = (unsigned char)(msgFunction>>8);
+        msg[2] =(unsigned char)(msgFunction>>0);
+        //payload length
+        msg[3] =(unsigned char)(2>>8);
+        msg[4] =(unsigned char)(2>>0);
+        //payload
+        msg[5]=(unsigned char)(NumSate);
+        msg[6]=(unsigned char)(timestamp>>24);
+        msg[7]=(unsigned char)(timestamp>>16);
+        msg[8]=(unsigned char)(timestamp>>8);
+        msg[9]=(unsigned char)(timestamp>>0);
+        //checksum
+        unsigned char* msgPayload={msg[5],msg[6],msg[7],msg[8],msg[9]};
+        msg[10]=UartCalculateChecksum(msgFunction, 5, msgPayload)
+}
 /*
 int msgDecodedFunction = 0;
 int msgDecodedPayloadLength = 0;

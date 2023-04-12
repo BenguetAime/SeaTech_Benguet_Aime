@@ -77,21 +77,30 @@ int main(void) {
             ADCValue1=result[1];
             ADCValue2=result[2];*/
 
+            
+            
             unsigned int * result = ADCGetResult();
             float volts = ((float) result[1])*3.3 / 4096 * 3.2;
-            robotState.distanceTelemetreDroit = 34 / volts - 5;
-            
+            robotState.distanceTelemetreDroit = 34 / volts - 5;                    
             
             volts = ((float) result[2])*3.3 / 4096 * 3.2;
-            robotState.distanceTelemetreCentre = 34 / volts - 5;
+            robotState.distanceTelemetreCentre = 34 / volts - 5;         
+            
             volts = ((float) result[4])*3.3 / 4096 * 3.2;
             robotState.distanceTelemetreGauche = 34 / volts - 5;
+                      
             volts = ((float) result[3])*3.3 / 4096 * 3.2;
             robotState.distanceTelemetreExtremiteGauche = 34 / volts - 5;
             volts = ((float) result[0])*3.3 / 4096 * 3.2;
             robotState.distanceTelemetreExtremiteDroit = 34 / volts - 5;
 
-
+            
+            unsigned char payload[3] ={robotState.distanceTelemetreGauche,robotState.distanceTelemetreCentre,robotState.distanceTelemetreDroit}; 
+            UartEncodeAndSendMessage(0x0030,3,payload);
+            
+            
+            
+            
             if (robotState.distanceTelemetreDroit < 30 || robotState.distanceTelemetreExtremiteDroit < 30) {
                 LED_ORANGE = 1;
             } else {
@@ -118,9 +127,9 @@ int main(void) {
             SendMessage(&c, 1);
             
         }*/
-        UartEncodeAndSendMessage(0x0080,7,payload);
+        //UartEncodeAndSendMessage(0x0080,7,payload);
        
-        __delay32(100000);
+       // __delay32(100000);
     }
 }
 unsigned char stateRobot;

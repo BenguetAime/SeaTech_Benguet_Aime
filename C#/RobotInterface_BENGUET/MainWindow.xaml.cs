@@ -240,7 +240,7 @@ namespace RobotInterface_BENGUET
                     int receivedChecksum = c;
                     if (calculatedChecksumvaleur == receivedChecksum)
                     {
-                       textBoxReception.Text += "Message bien reçu";
+                       //textBoxReception.Text += "Message bien reçu";
                        ProcessDecodedMessage(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
                       
                     }
