@@ -84,11 +84,11 @@ enum StateReception
 };
 
 
-/*
+
 enum StateReception rcvState = Waiting;
 int msgDecodedFunction = 0;
 int msgDecodedPayloadLength = 0;
-unsigned char *msgDecodedPayload[];
+unsigned char msgDecodedPayload[1];
 int msgDecodedPayloadIndex = 0;
 int receivedChecksum;
 
@@ -102,6 +102,7 @@ void UartDecodeMessage(unsigned char c)
                     if (c == 0xFE)
                     {
                         rcvState = FunctionMSB;
+                        
                     }
                     break;
                 case FunctionMSB:
@@ -124,19 +125,22 @@ void UartDecodeMessage(unsigned char c)
                     else
                     {
                         rcvState = Payload;
-                        msgDecodedPayloadIndex = 0;
+                        msgDecodedPayloadIndex = 0; 
                         unsigned char msgDecodedPayload[msgDecodedPayloadLength];
                     }
                     break;
                 case Payload:
+                    
                     msgDecodedPayload[msgDecodedPayloadIndex] = c;
                     msgDecodedPayloadIndex++;
                     if (msgDecodedPayloadIndex >= msgDecodedPayloadLength)
                         rcvState =CheckSum;
+                        
                     break;
 
-                case CheckSum:
-                    int calculatedChecksumvaleur = UartCalculateChecksum(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
+                /*
+                case CheckSum:                                     
+                    int calculatedChecksumvaleur = UartCalculateChecksum(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload); 
                     int receivedChecksum = c;
                     if (calculatedChecksumvaleur == receivedChecksum)
                     {
@@ -152,10 +156,11 @@ void UartDecodeMessage(unsigned char c)
                 default:
                     rcvState = Waiting;
                     break;
+                */
             }  
     
 }
-*/
+
 /*
 void UartProcessDecodedMessage(int msgFunction,int msgPayloadLength, unsigned char* msgPayload)
 {
