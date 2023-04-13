@@ -119,7 +119,7 @@ void __attribute__((interrupt, no_auto_psv)) _T4Interrupt(void) {
     //LED_BLEUE=!LED_BLEUE;
     timestamp=timestamp+1;
     OperatingSystemLoop();
-    //UartSendStateRobot(0x0050, NumSate, timestamp );
+    
 }
 
 

@@ -5,27 +5,16 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>UART_Protocol.h</itemPath>
-      <itemPath>ADC.c</itemPath>
       <itemPath>ADC.h</itemPath>
-      <itemPath>CB_RX1.c</itemPath>
       <itemPath>CB_RX1.h</itemPath>
-      <itemPath>CB_TX1.c</itemPath>
       <itemPath>CB_TX1.h</itemPath>
-      <itemPath>ChipConfig.c</itemPath>
       <itemPath>ChipConfig.h</itemPath>
-      <itemPath>IO.c</itemPath>
       <itemPath>IO.h</itemPath>
-      <itemPath>PWM.c</itemPath>
       <itemPath>PWM.h</itemPath>
-      <itemPath>Robot..c</itemPath>
       <itemPath>Robot.h</itemPath>
-      <itemPath>ToolBox.c</itemPath>
       <itemPath>ToolBox.h</itemPath>
-      <itemPath>UART.c</itemPath>
       <itemPath>UART.h</itemPath>
-      <itemPath>main.c</itemPath>
       <itemPath>main.h</itemPath>
-      <itemPath>timer.c</itemPath>
       <itemPath>timer.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
@@ -36,6 +25,17 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>UART_Protocol.c</itemPath>
+      <itemPath>ADC.c</itemPath>
+      <itemPath>CB_RX1.c</itemPath>
+      <itemPath>CB_TX1.c</itemPath>
+      <itemPath>ChipConfig.c</itemPath>
+      <itemPath>IO.c</itemPath>
+      <itemPath>main.c</itemPath>
+      <itemPath>PWM.c</itemPath>
+      <itemPath>Robot..c</itemPath>
+      <itemPath>timer.c</itemPath>
+      <itemPath>ToolBox.c</itemPath>
+      <itemPath>UART.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
