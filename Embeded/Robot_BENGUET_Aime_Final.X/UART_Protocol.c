@@ -120,7 +120,7 @@ void UartDecodeMessage(unsigned char c) {
             int receivedChecksum = c;
             if (calculatedChecksumvaleur == receivedChecksum) {
                 UartEncodeAndSendMessage(0x0080, 24, (unsigned char*) "Message au MicroC Valide");
-                //UartProcessDecodedMessage(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
+                UartProcessDecodedMessage(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
 
             } else
                 //textBoxReception.Text += "Message corrompu";                     
@@ -181,9 +181,11 @@ void UartProcessDecodedMessage(int msgFunction,int msgPayloadLength, unsigned ch
             {
             case SET_ROBOT_STATE:
                 SetRobotState(msgPayload[0]);
+                UartEncodeAndSendMessage(0x0080, 24, (unsigned char*) "State mis a jour");
                 break;
             case SET_ROBOT_MANUAL_CONTROL:
                 SetRobotAutoControlState(msgPayload[0]);
+                UartEncodeAndSendMessage(0x0080, 24, (unsigned char*) "State mode mis a jour");
                 break;
             default:
                 break;

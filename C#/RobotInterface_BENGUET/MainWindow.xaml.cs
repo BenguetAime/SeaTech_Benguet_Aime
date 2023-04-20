@@ -51,7 +51,6 @@ namespace RobotInterface_BENGUET
             {
                 byte c = robot.byteListReceived.Dequeue();
                 DecodeMessage(c);
-                //textBoxReception.Text += val.ToString();
             }
         }
 
@@ -135,12 +134,12 @@ namespace RobotInterface_BENGUET
             byte[] Vitesses = new byte[] { 25, 30 };
             UartEncodeAndSendMessage(0x0040, Vitesses.Length, Vitesses);
             */
-            byte[] SetState = new byte[] { 2 };
+            byte[] SetState = new byte[] { 1 };
             UartEncodeAndSendMessage(0x0051, SetState.Length, SetState);
+            
 
-
-            //byte[] SetManualControl = new byte[] { 0 };
-            //UartEncodeAndSendMessage(0x0052, SetManualControl.Length, SetManualControl);
+            byte[] SetManualControl = new byte[] { 1 };
+            UartEncodeAndSendMessage(0x0052, SetManualControl.Length, SetManualControl);
 
         }
 
@@ -229,6 +228,8 @@ namespace RobotInterface_BENGUET
                     msgDecodedPayloadLength += c << 0;
                     if (msgDecodedPayloadLength == 0)
                         rcvState = StateReception.CheckSum;
+                    else if (msgDecodedPayloadLength > 256)
+                        rcvState = StateReception.Waiting;
                     else
                     {
                         rcvState = StateReception.Payload;
@@ -248,12 +249,14 @@ namespace RobotInterface_BENGUET
                     int receivedChecksum = c;
                     if (calculatedChecksumvaleur == receivedChecksum)
                     {
-                       //textBoxReception.Text += "Message bien reçu";
-                       ProcessDecodedMessage(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
-                      
+                        //textBoxReception.Text += "Message bien reçu";
+                        ProcessDecodedMessage(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
+
                     }
-                    else                       
+                    else
+                    {
                         textBoxReception.Text += "Message corrompu";
+                    }
                         rcvState = StateReception.Waiting;
                     break;
                 default:

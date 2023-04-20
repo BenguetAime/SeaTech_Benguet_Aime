@@ -77,33 +77,33 @@ int main(void) {
             ADCValue1=result[1];
             ADCValue2=result[2];*/
 
-            
-            
+
+
             unsigned int * result = ADCGetResult();
             float volts = ((float) result[1])*3.3 / 4096 * 3.2;
-            robotState.distanceTelemetreDroit = 34 / volts - 5;                    
-            
+            robotState.distanceTelemetreDroit = 34 / volts - 5;
+
             volts = ((float) result[2])*3.3 / 4096 * 3.2;
-            robotState.distanceTelemetreCentre = 34 / volts - 5;         
-            
+            robotState.distanceTelemetreCentre = 34 / volts - 5;
+
             volts = ((float) result[4])*3.3 / 4096 * 3.2;
             robotState.distanceTelemetreGauche = 34 / volts - 5;
-                      
+
             volts = ((float) result[3])*3.3 / 4096 * 3.2;
             robotState.distanceTelemetreExtremiteGauche = 34 / volts - 5;
             volts = ((float) result[0])*3.3 / 4096 * 3.2;
             robotState.distanceTelemetreExtremiteDroit = 34 / volts - 5;
 
-            
-            unsigned char payload[3] ={robotState.distanceTelemetreGauche,
-            robotState.distanceTelemetreCentre,robotState.distanceTelemetreDroit};
-            unsigned char payload2[2]={robotState.vitesseGaucheConsigne,robotState.vitesseDroiteConsigne};
-            UartEncodeAndSendMessage(0x0030,3,payload);
-            UartEncodeAndSendMessage(0x0040,2,payload2);
-            
-            
-            
-            
+
+            unsigned char payload[3] = {robotState.distanceTelemetreGauche,
+                robotState.distanceTelemetreCentre, robotState.distanceTelemetreDroit};
+            unsigned char payload2[2] = {robotState.vitesseGaucheConsigne, robotState.vitesseDroiteConsigne};
+            UartEncodeAndSendMessage(0x0030, 3, payload);
+            UartEncodeAndSendMessage(0x0040, 2, payload2);
+
+
+
+
             if (robotState.distanceTelemetreDroit < 30 || robotState.distanceTelemetreExtremiteDroit < 30) {
                 LED_ORANGE = 1;
             } else {
@@ -129,11 +129,11 @@ int main(void) {
             unsigned char c = CB_RX1_Get();
             UartDecodeMessage(c);
             //SendMessage(&c, 1);
-            
+
         }
         //UartEncodeAndSendMessage(0x0080,7,payload);
-       
-       // __delay32(100000);
+
+        // __delay32(100000);
     }
 }
 unsigned char stateRobot;
@@ -143,34 +143,27 @@ float vitesse = 10;
 
 ////////////////////////////////////////////////////////////////////////////////
 
-unsigned char autoControl=1;
+unsigned char autoControl = 1;
 
-void SetRobotState(unsigned char State){
-    stateRobot=State;
-    
+void SetRobotState(unsigned char State) {
+    stateRobot = State;
+
 }
 
-void SetRobotAutoControlState(unsigned char command){
-    autoControl=1;
-    if (command==0){
-        autoControl=0;
-        stateRobot=STATE_MANUALCONTROL_ACTIVATED;}
+void SetRobotAutoControlState(unsigned char command) {
+    autoControl = 1;
+    if (command == 0) {
+        autoControl = 0;
+        stateRobot = STATE_TOURNE_SUR_PLACE_DROITE_EN_COURS;
+    }
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
-
 void OperatingSystemLoop(void) {
-    unsigned long time=timestamp;
+
     switch (stateRobot) {
-        case STATE_MANUALCONTROL_ACTIVATED:          
-            stateRobot=stateRobot;
-            break;
         case STATE_ATTENTE:
             timestamp = 0;
             PWMSetSpeedConsigne(0, MOTEUR_DROIT);
@@ -178,21 +171,21 @@ void OperatingSystemLoop(void) {
             stateRobot = STATE_ATTENTE_EN_COURS;
 
         case STATE_ATTENTE_EN_COURS:
-            if (timestamp > 1000)
-                stateRobot = STATE_AVANCE;    
+            if (autoControl == 1) {
+                if (timestamp > 1000)
+                    stateRobot = STATE_AVANCE;
+            }
             break;
 
         case STATE_AVANCE:
             PWMSetSpeedConsigne(vitesse, MOTEUR_DROIT);
             PWMSetSpeedConsigne(vitesse, MOTEUR_GAUCHE);
             stateRobot = STATE_AVANCE_EN_COURS;
-            
+
             break;
         case STATE_AVANCE_EN_COURS:
-            if (autoControl==1)
+            if (autoControl == 1)
                 SetNextRobotStateInAutomaticMode();
-            else
-                stateRobot=STATE_MANUALCONTROL_ACTIVATED;
             break;
 
         case STATE_TOURNE_GAUCHE:
@@ -201,10 +194,8 @@ void OperatingSystemLoop(void) {
             stateRobot = STATE_TOURNE_GAUCHE_EN_COURS;
             break;
         case STATE_TOURNE_GAUCHE_EN_COURS:
-            if (autoControl==1)
+            if (autoControl == 1)
                 SetNextRobotStateInAutomaticMode();
-            else
-                stateRobot=STATE_MANUALCONTROL_ACTIVATED;
             break;
 
         case STATE_TOURNE_DROITE:
@@ -213,22 +204,18 @@ void OperatingSystemLoop(void) {
             stateRobot = STATE_TOURNE_DROITE_EN_COURS;
             break;
         case STATE_TOURNE_DROITE_EN_COURS:
-            if (autoControl==1)
+            if (autoControl == 1)
                 SetNextRobotStateInAutomaticMode();
-            else
-                stateRobot=STATE_MANUALCONTROL_ACTIVATED;
             break;
 
         case STATE_TOURNE_SUR_PLACE_GAUCHE:
             PWMSetSpeedConsigne(vitesse / 2, MOTEUR_DROIT);
             PWMSetSpeedConsigne(-vitesse / 2, MOTEUR_GAUCHE);
-            stateRobot = STATE_TOURNE_SUR_PLACE_GAUCHE_EN_COURS;            
+            stateRobot = STATE_TOURNE_SUR_PLACE_GAUCHE_EN_COURS;
             break;
         case STATE_TOURNE_SUR_PLACE_GAUCHE_EN_COURS:
-            if (autoControl==1)
+            if (autoControl == 1)
                 SetNextRobotStateInAutomaticMode();
-            else
-                stateRobot=STATE_MANUALCONTROL_ACTIVATED;
             break;
 
         case STATE_TOURNE_SUR_PLACE_DROITE:
@@ -237,10 +224,8 @@ void OperatingSystemLoop(void) {
             stateRobot = STATE_TOURNE_SUR_PLACE_DROITE_EN_COURS;
             break;
         case STATE_TOURNE_SUR_PLACE_DROITE_EN_COURS:
-            if (autoControl==1)
+            if (autoControl == 1)
                 SetNextRobotStateInAutomaticMode();
-            else
-                stateRobot=STATE_MANUALCONTROL_ACTIVATED;
             break;
 
         default:
@@ -252,7 +237,6 @@ void OperatingSystemLoop(void) {
 
 unsigned char nextStateRobot = 0;
 unsigned char StateRobot2 = 0;
-
 
 void SetNextRobotStateInAutomaticMode() {
     unsigned char positionObstacle = PAS_D_OBSTACLE;
@@ -326,7 +310,7 @@ void SetNextRobotStateInAutomaticMode() {
     //Si l?on n?est pas dans la transition de l?étape en cours
     if (nextStateRobot != stateRobot - 1) {
         stateRobot = nextStateRobot;
-        UartSendStateRobot(0x0050, stateRobot, timestamp);
+        //UartSendStateRobot(0x0050, stateRobot, timestamp);
     }
 
 
