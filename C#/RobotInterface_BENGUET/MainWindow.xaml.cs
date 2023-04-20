@@ -121,7 +121,7 @@ namespace RobotInterface_BENGUET
             //    byteList[i] = (byte)(2*i);
             //}
             //serialPort1.Write(byteList, 0, byteList.Length);
-            
+            /*
             byte[] array = Encoding.ASCII.GetBytes("Bonjour");
             UartEncodeAndSendMessage(0x0080, array.Length, array);
 
@@ -130,9 +130,17 @@ namespace RobotInterface_BENGUET
             
             byte[] DistIR = new byte[] { 5, 10, 15 };
             UartEncodeAndSendMessage(0x0030, DistIR.Length, DistIR);
-
+            */
+            /*
             byte[] Vitesses = new byte[] { 25, 30 };
             UartEncodeAndSendMessage(0x0040, Vitesses.Length, Vitesses);
+            */
+            byte[] SetState = new byte[] { 2 };
+            UartEncodeAndSendMessage(0x0051, SetState.Length, SetState);
+
+
+            //byte[] SetManualControl = new byte[] { 0 };
+            //UartEncodeAndSendMessage(0x0052, SetManualControl.Length, SetManualControl);
 
         }
 
@@ -240,7 +248,7 @@ namespace RobotInterface_BENGUET
                     int receivedChecksum = c;
                     if (calculatedChecksumvaleur == receivedChecksum)
                     {
-                       textBoxReception.Text += "Message bien reçu";
+                       //textBoxReception.Text += "Message bien reçu";
                        ProcessDecodedMessage(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
                       
                     }
@@ -320,6 +328,8 @@ namespace RobotInterface_BENGUET
 
                     textBoxReception.Text += robot.receivedText;
                     break;
+
+
 
                
             }

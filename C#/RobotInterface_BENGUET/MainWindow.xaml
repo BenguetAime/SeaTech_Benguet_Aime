@@ -20,7 +20,7 @@
             <TextBox x:Name="textBoxEmission"/>
         </GroupBox>
         <GroupBox Header="Réception" Background="#FFDDDDDD" BorderBrush="Black" Grid.Column="1" Grid.Row="0" Margin="5">
-            <TextBox x:Name="textBoxReception"/>
+            <TextBox x:Name="textBoxReception"  TextWrapping="Wrap"/>
         </GroupBox>
 
         <Button x:Name="ButtonEnvoyer" Content="Envoyer" Grid.Column="0" Grid.Row="1" Width="100" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ButtonEnvoyer_Click_1"/>

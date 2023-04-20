@@ -22,6 +22,7 @@
 #define STATE_ARRET_EN_COURS 13
 #define STATE_RECULE 14
 #define STATE_RECULE_EN_COURS 15
+#define STATE_MANUALCONTROL_ACTIVATED 16
 
 #define PAS_D_OBSTACLE 0
 #define OBSTACLE_A_GAUCHE 1
@@ -32,6 +33,9 @@
 int main(void);
 void OperatingSystemLoop(void);
 void SetNextRobotStateInAutomaticMode(void);
+
+void SetRobotState(unsigned char);
+void SetRobotAutoControlState(unsigned char);
 
 #endif	/* MAIN_H */
 
