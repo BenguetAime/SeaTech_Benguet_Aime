@@ -1,0 +1,14 @@
+eclipse.preferences.version=1
+encoding//Release/Application/subdir_rules.mk=UTF-8
+encoding//Release/Application/subdir_vars.mk=UTF-8
+encoding//Release/Drivers/NV/subdir_rules.mk=UTF-8
+encoding//Release/Drivers/NV/subdir_vars.mk=UTF-8
+encoding//Release/NPI/subdir_rules.mk=UTF-8
+encoding//Release/NPI/subdir_vars.mk=UTF-8
+encoding//Release/Profiles/subdir_rules.mk=UTF-8
+encoding//Release/Profiles/subdir_vars.mk=UTF-8
+encoding//Release/Startup/subdir_rules.mk=UTF-8
+encoding//Release/Startup/subdir_vars.mk=UTF-8
+encoding//Release/sources.mk=UTF-8
+encoding//Release/subdir_rules.mk=UTF-8
+encoding//Release/subdir_vars.mk=UTF-8
