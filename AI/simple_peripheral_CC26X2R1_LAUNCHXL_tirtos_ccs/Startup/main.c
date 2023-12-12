@@ -59,9 +59,6 @@
 #include "hal_assert.h"
 #include "bcomdef.h"
 #include "simple_peripheral.h"
-//
-#include "./TacheADC/TacheADC.h"
-
 #ifdef PTM_MODE
 #include "npi_task.h"
 #endif // PTM_MODE
@@ -77,6 +74,10 @@ icall_userCfg_t user0Cfg = BLE_USER_CFG;
 #endif // USE_DEFAULT_USER_CFG
 
 #include <ti/display/Display.h>
+
+#include "./TacheADC/TacheADC.h"
+
+#include "./TacheLCD/TacheLCD.h""
 
 /*******************************************************************************
  * MACROS
@@ -140,7 +141,6 @@ int main()
   Power_setConstraint(PowerCC26XX_IDLE_PD_DISALLOW);
 #endif // POWER_SAVING
 
-
   /* Update User Configuration of the stack */
   user0Cfg.appServiceInfo->timerTickPeriod = Clock_tickPeriod;
   user0Cfg.appServiceInfo->timerMaxMillisecond  = ICall_getMaxMSecs();
@@ -156,11 +156,9 @@ int main()
   NPITask_createTask(ICALL_SERVICE_CLASS_BLE);
 #endif // PTM_MODE
 
-
-
-  //SimplePeripheral_createTask();
-  //Appel de:TacheADC_CreateTask
-  TacheADC_CreateTask();
+ // SimplePeripheral_createTask();
+TacheADC_CreateTask();
+TacheLCD_CreateTask();
 
   /* enable interrupts and start SYS/BIOS */
   BIOS_start();
@@ -287,3 +285,4 @@ void smallErrorHook(Error_Block *eb)
 
 /*******************************************************************************
  */
+

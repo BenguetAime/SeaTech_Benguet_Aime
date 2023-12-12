@@ -1,6 +1,6 @@
 #
 # This file was generated based on the configuration script:
-#     C:\Github\Seatech_Benguet_Aime\AI\simple_peripheral_CC26X2R1_LAUNCHXL_tirtos_ccs\simple_peripheral_app.cfg
+#     C:\Github\Seatech_Benguet_Aime\SeaTech_Benguet_Aime\AI\simple_peripheral_CC26X2R1_LAUNCHXL_tirtos_ccs\simple_peripheral_app.cfg
 #
 # This makefile may be included in other makefiles that need to build
 # the libraries containing the compiled source files generated as
@@ -14,7 +14,7 @@
 #
 # The absolute path to the generated source directory (at the time the
 # sources were generated) is:
-#    C:\Github\Seatech_Benguet_Aime\AI\simple_peripheral_CC26X2R1_LAUNCHXL_tirtos_ccs\src
+#    C:\Github\Seatech_Benguet_Aime\SeaTech_Benguet_Aime\AI\simple_peripheral_CC26X2R1_LAUNCHXL_tirtos_ccs\src
 #
 GEN_SRC_DIR ?= ../src
 
