@@ -16,6 +16,7 @@ void InitOrder1LPFilterEuler(Order1Filter* filter, float freqCoupure, float freq
     filter->beta0 = Te/(Te+Tau);
     filter->beta1 = 0;
 
+
     filter->s1 = 0;
     filter->reset = 1; //Demande un reset de l'entrée à la prochaine itération
 }
