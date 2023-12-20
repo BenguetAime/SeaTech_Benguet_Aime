@@ -76,8 +76,8 @@ icall_userCfg_t user0Cfg = BLE_USER_CFG;
 #include <ti/display/Display.h>
 
 #include "./TacheADC/TacheADC.h"
-
-#include "./TacheLCD/TacheLCD.h""
+#include "./TacheLCD/TacheLCD.h"
+#include "./TacheFFTClassification/TacheFFTClassification.h"
 
 /*******************************************************************************
  * MACROS
@@ -159,6 +159,7 @@ int main()
  // SimplePeripheral_createTask();
 TacheADC_CreateTask();
 TacheLCD_CreateTask();
+TacheFFTClassification_CreateTask();
 
   /* enable interrupts and start SYS/BIOS */
   BIOS_start();
