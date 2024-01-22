@@ -43,7 +43,7 @@
 #define RayonRobot 0.145         //0.185
 #endif
 
-//NOTES
+//NOTES//
 typedef struct robotStateBITS {
     //union {
         struct {
