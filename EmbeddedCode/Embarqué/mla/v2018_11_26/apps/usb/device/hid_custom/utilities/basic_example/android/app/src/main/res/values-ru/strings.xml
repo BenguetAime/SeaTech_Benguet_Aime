@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="weblink">www.microchip.com/usb</string>
+    
+    <string name="app_name">USB устройства</string>
+    <string name="app_title">USB устройства</string>
+ 
+    <string name="no_device_attached">Устройство не найдено</string>
+    <string name="device_attached">Устройство подключено</string>
+    <string name="attach_device">Подключите устройство. Эта демонстрация предназначена для работы со следующими решениями, представленными в Microchip Application Libraries USB framework (www.microchip.com/usb):\r\n   LibUSB Demo\r\n   WinUSB Demo\r\n   MCHPUSB Demo\r\n   Custom HID Demo</string>
+ 
+    <string name="toggle_leds_button">Управление светодиодами</string>
+    <string name="toggle_leds_description">Нажатие кнопок изменяет состояние светодиодов на подключенной плате</string>
+    
+    <string name="button_status_description">Состояние кнопок на подключенной плате</string>
+    <string name="button_pressed">Кнопка нажата</string>
+    <string name="button_not_pressed">Кнопка отпущена</string>
+    
+    <string name="pot_status_description">Индикатор положения потенциометра</string>
+</resources>
